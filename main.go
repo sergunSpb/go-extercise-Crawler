@@ -9,8 +9,6 @@ type Fetcher interface {
 	Fetch(url string) (body string, urls []string, err error)
 }
 
-// Crawl uses fetcher to recursively crawl
-// pages starting with url, to a maximum of depth.
 func Crawl(url string, depth int, fetcher Fetcher, wg *sync.WaitGroup , visitMap *syncVisitedMap) {
 	defer wg.Done()
 
@@ -43,7 +41,6 @@ func main() {
 	wg.Wait()
 }
 
-// fakeFetcher is Fetcher that returns canned results.
 type fakeFetcher map[string]*fakeResult
 
 type fakeResult struct {
